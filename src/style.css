@@ -7,3 +7,48 @@
 body {
     font-family: sans-serif;
 }
+
+.cart {
+    position: relative;
+    font-size: 30px;
+    border-radius: 4px;
+}
+
+.cartAmount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -11px;
+    right: -8px;
+    font-size: 16px;
+    background-color: #fe4c50;
+    color: white;
+    padding: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  .price-quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .bi-dash-lg {
+    color: red;
+  }
+  
+  .bi-plus-lg {
+    color: green;
+  }
