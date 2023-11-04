@@ -8,7 +8,7 @@ body {
     font-family: sans-serif;
 }
 
-.cart {
+.cart-icon {
     position: relative;
     font-size: 30px;
     border-radius: 4px;
@@ -51,4 +51,10 @@ body {
   
   .bi-plus-lg {
     color: green;
+  }
+
+  .cart {
+    /* width: 350px; */
+    padding: 10px;
+    box-shadow: 5px 5px 10px gray;
   }

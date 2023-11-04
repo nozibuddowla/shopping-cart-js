@@ -17,9 +17,9 @@
             
             <div class="d-flex flex-row justify-conten-between">
                 <div class="cart-button">
-                    <button class="btn btn-light cart " id="cartButton" >
+                    <button class="btn btn-light cart-icon" id="cartButton" >
                         <i class="bi bi-cart2"></i>
-                            <span id="cartAmount" class="cartAmount">0</div>
+                            <span id="cart_amount" class="cartAmount">0</div>
                     </button>
                 </div>
             </div>
@@ -27,14 +27,14 @@
     </nav>
 
     <section class="container-fluid mt-5">
-        <div class="row  justify-content-between">
+        <div class="row justify-content-between">
             <div class="col-md-3 col-lg-3 col-sm-5 ">
-                <div class="cart" id="my-cart">
+                <div class="cart bg-white rounded" id="my-cart">
                         <table class="table">
                             <thead>
                                 <h4>My Cart</h4>
                                 <tr>
-                                    <th scope="col"></th>
+                                    <!-- <th scope="col"></th> -->
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
@@ -43,7 +43,7 @@
                             <tbody>
                                 <tr>
                                     <th>Total Added-Products:</th>
-                                    <td><span id="total-Products">0</span></td>
+                                    <td><span id="total_products">0</span></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -53,11 +53,11 @@
                                 </tr>
                                 <tr>
                                     <th>Delivery-Charge:</th>
-                                    <td>$ <span id="delivery-charge">20</span></td>
+                                    <td>$ <span id="delivery_charge">20</span></td>
                                 </tr>
                                 <tr>
                                     <th>Total-Tax:</th>
-                                    <td>$ <span id="total-tax">0</span></td>
+                                    <td>$ <span id="total_tax">0</span></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Total</th>
@@ -65,6 +65,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                </div>
+                <div id="added_products">
+
                 </div>
             </div>
             <div class="col-md-9 col-lg-9 col-sm-7">
