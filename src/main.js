@@ -4,7 +4,6 @@ let shop = document.getElementById("shop");
     let cartAmount = document.getElementById("cart_amount");
     let totalProducts = document.getElementById("total_products");
     let price = document.getElementById("price");
-    // let deliveryCharge = document.getElementById("delivery_charge");
     let totalTax = document.getElementById("total_tax");
     let total = document.getElementById("total");
     
@@ -116,39 +115,43 @@ let shop = document.getElementById("shop");
             if (cart.hasOwnProperty(productId)) {
                 const quantity = cart[productId];
                 const product = shopItemsData.find((item) => item.id === productId);
-    
-                // Update the quantity display
-                document.getElementById(productId).textContent = quantity;
-    
-                // Calculate the price for this product
-                let productPrice = product.price * quantity;
-    
-    
-                // Add the product to the sidebar
-                let sidebarItem = document.createElement("div");
-                sidebarItem.innerHTML = `
-                    <div class="card mt-2">
-                        <div class="card-body d-flex justify-content-between">
-                            <h5 class="card-title">${product.name}</h5>
-                            <button type="button" class="btn-close" aria-label="Close" id='removeProduct'></button>
-                        </div>
-                        <div class="card-footer">
-                            <div class="price-quantity">
-                                <p>$ ${productPrice}</p>
-                                <div class="buttons">
-                                    <i class="bi bi-dash-lg decrement"></i>
-                                    <span id='${product.id}' class="quantity">${quantity}</span>
-                                    <i class="bi bi-plus-lg increment"></i>
+
+                if (quantity > 0) {
+                    // Update the quantity display
+                    document.getElementById(productId).textContent = quantity;
+
+                    // Calculate the price for this product
+                    let productPrice = product.price * quantity;
+
+                    // Add the product to the sidebar
+                    let sidebarItem = document.createElement("div");
+                    sidebarItem.innerHTML = `
+                        <div class="card mt-2 product-card">
+                            <div class="card-body d-flex justify-content-between">
+                                <h5 class="card-title">${product.name}</h5>
+                                <button type="button" class="btn-close" aria-label="Close" id='removeProduct'></button>
+                            </div>
+                            <div class="card-footer">
+                                <div class="price-quantity">
+                                    <p>$ ${productPrice}</p>
+                                    <div class="buttons">
+                                        <i class="bi bi-dash-lg decrement"></i>
+                                        <span id='${product.id}' class="quantity">${quantity}</span>
+                                        <i class="bi bi-plus-lg increment"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                sidebar.appendChild(sidebarItem);
-    
-                // Update the total price and total product count
-                totalPrice += productPrice;
-                totalProductsCount += quantity;
+                    `;
+                    sidebar.appendChild(sidebarItem);
+
+                    // Update the total price and total product count
+                    totalPrice += productPrice;
+                    totalProductsCount += quantity;
+                } else {
+                    // If the quantity is 0, remove the product from the cart object
+                    delete cart[productId];
+                }
             }
         }
     
@@ -195,11 +198,11 @@ let shop = document.getElementById("shop");
 
         // Define the removeProduct function
         function removeProduct(productId) {
-        if (cart[productId] !== undefined) {
-            cart[productId] = 0;
-            updateCart();
-            updateLocalStorage();
-        }
+            if (cart[productId] !== undefined) {
+                cart[productId] = 0;
+                updateCart();
+                updateLocalStorage();
+            }
         }
     }
     
