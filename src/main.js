@@ -6,6 +6,9 @@ let shop = document.getElementById("shop");
     let price = document.getElementById("price");
     let totalTax = document.getElementById("total_tax");
     let total = document.getElementById("total");
+
+    // Get the cart button element
+    const cartButton = document.getElementById("cart-button");
     
     
     let generateShop = () => {
@@ -39,29 +42,7 @@ let shop = document.getElementById("shop");
     // Create an empty cart object to store selected products
     let cart = {};
     
-    // Add event listeners to increment and decrement buttons
-    shop.addEventListener("click", (event) => {
-        if (event.target.classList.contains("bi-plus-lg")) {
-            // Increment button clicked
-            const productId = event.target.parentElement.querySelector(".quantity").id;
-    
-            if (cart[productId] === undefined) {
-                cart[productId] = 1; // Initialize the quantity to 1
-            } else if (cart[productId] > 0) {
-                cart[productId]++; // Increment the quantity
-            }
-            updateCart();
-        } else if (event.target.classList.contains("bi-dash-lg")) {
-            // Decrement button clicked
-            const productId = event.target.parentElement.querySelector(".quantity").id;
-    
-            if (cart[productId] !== undefined && cart[productId] > 0) {
-                cart[productId]--; // Decrement the quantity
-                updateCart();
-            }
-        }
-    });
-    
+
     // Initialize the cart data from local storage (if available)
     const storedCart = JSON.parse(localStorage.getItem("cart"));
     if (storedCart) {
@@ -106,8 +87,9 @@ let shop = document.getElementById("shop");
     function cartDisplay() {
         const myCart = document.getElementById("my-cart");
         const addedProducts = document.getElementById("added_products");
+        // const cartButton = document.getElementById("cart-button");
     
-        if (Object.keys(cart).length > 0) {
+        if (Object.keys(cart).length > 0 || myCart.style.display === "none" || myCart.style.display === "") {
             myCart.style.display = "block";
             addedProducts.style.display = "block";
         } else {
@@ -221,6 +203,32 @@ let shop = document.getElementById("shop");
 
         cartDisplay();
     }
+
+    // Add a click event listener to the cart button
+    cartButton.addEventListener("click", cartDisplay);
+
+    // Add event listeners to increment and decrement buttons
+    shop.addEventListener("click", (event) => {
+        if (event.target.classList.contains("bi-plus-lg")) {
+            // Increment button clicked
+            const productId = event.target.parentElement.querySelector(".quantity").id;
+    
+            if (cart[productId] === undefined) {
+                cart[productId] = 1; // Initialize the quantity to 1
+            } else if (cart[productId] > 0) {
+                cart[productId]++; // Increment the quantity
+            }
+            updateCart();
+        } else if (event.target.classList.contains("bi-dash-lg")) {
+            // Decrement button clicked
+            const productId = event.target.parentElement.querySelector(".quantity").id;
+    
+            if (cart[productId] !== undefined && cart[productId] > 0) {
+                cart[productId]--; // Decrement the quantity
+                updateCart();
+            }
+        }
+    });
 
     // Call cartDisplay on page load
     window.addEventListener("load", () => {
