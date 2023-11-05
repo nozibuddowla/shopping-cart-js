@@ -100,7 +100,21 @@ let shop = document.getElementById("shop");
         // Update the cart amount in the navbar
         cartAmount.textContent = totalProductsCount;
     }
+
+
+    // Call cartDisplay when updating the cart
+    function cartDisplay() {
+        const myCart = document.getElementById("my-cart");
+        const addedProducts = document.getElementById("added_products");
     
+        if (Object.keys(cart).length > 0) {
+            myCart.style.display = "block";
+            addedProducts.style.display = "block";
+        } else {
+            myCart.style.display = "none";
+            addedProducts.style.display = "none";
+        }
+    }
     
     // Function to update the cart and display values
     function updateCart() {
@@ -204,7 +218,14 @@ let shop = document.getElementById("shop");
                 updateLocalStorage();
             }
         }
+
+        cartDisplay();
     }
+
+    // Call cartDisplay on page load
+    window.addEventListener("load", () => {
+        cartDisplay();
+    });
     
     // Initial cart update
     updateCart();
@@ -229,13 +250,16 @@ let shop = document.getElementById("shop");
     }
     
     
-    
     // Add event listener to the checkout button
     document.getElementById("checkout-button").addEventListener("click", () => {
-        // Clear the cart and local storage
-        localStorage.removeItem("cart");
-        alert("Checkout successful. Cart is now empty.");
-        window.location.href = "index.html"; // Redirect to the main shopping page
+        if (Object.keys(cart).length === 0) {
+            alert("No products in your cart. Add products to your cart before checking out.");
+        } else {
+            // Clear the cart and local storage
+            localStorage.removeItem("cart");
+            alert("Checkout successful. Cart is now empty.");
+            window.location.href = "index.html"; // Redirect to the main shopping page
+        }
     });
 
 
